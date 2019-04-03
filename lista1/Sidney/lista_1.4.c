@@ -1,5 +1,6 @@
 // Escrito por Sidney Loyola de Sá
-// Data: 30/03/2019
+// Data: 30/03/2019  /  02/04/2019
+
 
 #include <stdio.h>
 #include <math.h> //lembrar de incluir o -lm no final na hora de compilar
