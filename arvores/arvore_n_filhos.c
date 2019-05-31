@@ -98,3 +98,19 @@ ArvnNo* arvn_busca(Arvn*a,char c){
     return busca(a->raiz,c);
   }
 }
+
+static void libera(ArvnNo* r){
+  ArvnNo* p = r->prim;
+  while(p!=NULL){
+    ArvnNo* t = p->prox;
+    libera(p);
+    p = t;
+  }
+  free(r);
+}
+
+void arvn_libera(Arvn* a){
+  if(a->raiz!=NULL)
+  libera(a->raiz);
+  free(a);
+}
