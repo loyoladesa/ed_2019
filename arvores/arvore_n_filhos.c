@@ -1,6 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "ArvnNo.h"
+
+struct arvnno{
+  char info;
+  ArvnNo* prim;
+  ArvnNo* prox;
+};
+
+struct arvn{
+  ArvnNo* raiz;
+};
+
+
 
 int main(void){
 
@@ -27,6 +40,8 @@ int main(void){
 	
 	Arvn* x = arvn_cria(a);
 
+  arvn_imprime(x);
+
 	return 0;
 }
 
@@ -48,3 +63,38 @@ Arvn* arvn_cria(ArvnNo* r){
 	Arvn* a = (Arvn*)malloc(sizeof(Arvn));
 	a->raiz = r;
 	return a;
+}
+
+static void imprime(ArvnNo* r){
+
+  printf("<%c",r->info);
+  for(ArvnNo* p = r->prim;p!=NULL;p=p->prox){
+    imprime(p);
+    printf(">");
+
+  }
+}
+
+void arvn_imprime(Arvn* a){
+  if(a->raiz!=NULL)
+  imprime(a->raiz);
+}
+
+static ArvnNo* busca(ArvnNo* r, char c){
+  if(r->info == c)return r;
+  else{
+    for(ArvnNo* p = r->prim;p!= NULL; p=p->prox){
+      ArvnNo* q = busca(p,c);
+      if(q!=NULL)return q;
+    }
+    return NULL;
+  }
+}
+
+ArvnNo* arvn_busca(Arvn*a,char c){
+  if(a->raiz == NULL){
+    return NULL;
+  }else{
+    return busca(a->raiz,c);
+  }
+}
